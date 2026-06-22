@@ -2,8 +2,20 @@
 
 import { useState } from "react";
 import SummaryCard from "../components/SummaryCard";
-
 import RewardModal from "../components/RewardModal";
+import HistoryTabs from "../components/HistoryTabs";
+import RewardHistory from "../components/RewardHistory";
+import PlayHistory from "../components/PlayHistory";
+
+type RewardItem = {
+  reward: string;
+  date: string;
+};
+
+type PlayHistoryItem = {
+  score: number;
+  date: string;
+};
 
 export default function Home() {
   const [totalScore, setTotalScore] = useState(10000);
@@ -12,9 +24,21 @@ export default function Home() {
   const [claimedC, setClaimedC] = useState(false);
   const [showRewardModal, setShowRewardModal] = useState(false);
   const [selectedReward, setSelectedReward] = useState("");
+  const [activeTab, setActiveTab] = useState<"play" | "reward">("play");
+
+  const [rewardHistory, setRewardHistory] = useState<RewardItem[]>([]);
+  const [playHistory, setPlayHistory] = useState<PlayHistoryItem[]>([]);
 
   const handleClaimA = () => {
     setClaimedA(true);
+
+    setRewardHistory((prev) => [
+      ...prev,
+      {
+        reward: "A",
+        date: new Date().toLocaleString(),
+      },
+    ]);
 
     setSelectedReward("A");
     setShowRewardModal(true);
@@ -23,12 +47,28 @@ export default function Home() {
   const handleClaimB = () => {
     setClaimedB(true);
 
+    setRewardHistory((prev) => [
+      ...prev,
+      {
+        reward: "B",
+        date: new Date().toLocaleString(),
+      },
+    ]);
+
     setSelectedReward("B");
     setShowRewardModal(true);
   };
 
   const handleClaimC = () => {
     setClaimedC(true);
+
+    setRewardHistory((prev) => [
+      ...prev,
+      {
+        reward: "C",
+        date: new Date().toLocaleString(),
+      },
+    ]);
 
     setSelectedReward("C");
     setShowRewardModal(true);
@@ -51,6 +91,13 @@ export default function Home() {
         rewardName={selectedReward}
         onClose={() => setShowRewardModal(false)}
       />
+
+      <HistoryTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === "play" ? (
+        <PlayHistory plays={playHistory} />
+      ) : (
+        <RewardHistory rewards={rewardHistory} />
+      )}
     </main>
   );
 }
