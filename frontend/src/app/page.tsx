@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import SummaryCard from "../components/SummaryCard";
 import RewardModal from "../components/RewardModal";
@@ -38,10 +39,12 @@ export default function Home() {
 
   const claimedC = rewardHistory.some((item) => item.reward === "C");
 
+  const pathname = usePathname();
+
   useEffect(() => {
     const loadGameData = async () => {
       const data = await getGameData();
-      console.log(data);
+
       setTotalScore(data.totalScore);
 
       setPlayHistory(data.playHistory);
@@ -50,7 +53,7 @@ export default function Home() {
     };
 
     loadGameData();
-  }, []);
+  }, [pathname]);
 
   const handleClaimA = async () => {
     await claimReward("A");

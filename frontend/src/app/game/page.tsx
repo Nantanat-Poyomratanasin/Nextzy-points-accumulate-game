@@ -1,12 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { playGame as playGameApi } from "../../services/gameApi";
+import { getGameData } from "../../services/gameApi";
+
+import { useState, useEffect } from "react";
 import ScoreModal from "../../components/ScoreModal";
 import FooterButton from "../../components/FooterButton";
 import { useRouter } from "next/navigation";
 
 export default function GamePage() {
   const scores = [300, 500, 1000, 3000];
+
+  const [totalScore, setTotalScore] = useState(0);
+
+  useEffect(() => {
+    const loadGameData = async () => {
+      const data = await getGameData();
+
+      setTotalScore(data.totalScore);
+    };
+
+    loadGameData();
+  }, []);
 
   const [selectedScore, setSelectedScore] = useState<number | null>(null);
 
@@ -25,7 +40,6 @@ export default function GamePage() {
 
     setSelectedScore(null);
     setShowModal(false);
-    setGameStatus("playing");
 
     let count = 0;
 
@@ -39,14 +53,24 @@ export default function GamePage() {
       if (count >= 15) {
         clearInterval(interval);
 
-        setFinalScore(randomScore);
-
-        setTimeout(() => {
-          setGameStatus("finish");
-          setShowModal(true);
-        }, 300);
+        finishGame();
       }
     }, 120);
+  };
+
+  const finishGame = async () => {
+    const result = await playGameApi();
+
+    setTotalScore(result.totalScore);
+
+    setFinalScore(result.score);
+
+    setSelectedScore(result.score);
+
+    setTimeout(() => {
+      setGameStatus("finish");
+      setShowModal(true);
+    }, 300);
   };
 
   const router = useRouter();
@@ -55,7 +79,7 @@ export default function GamePage() {
     <main className="min-h-screen flex justify-center bg-[#F5F5F5]">
       <div className="relative w-[375px] h-[812px] bg-gradient-to-b from-white to-[#FF8D0B] overflow-hidden">
         <h2 className="pt-12 text-center text-[16px] font-bold text-[#333333]">
-          คะแนนสะสม 0/10000
+          คะแนนสะสม {totalScore}/10000
         </h2>
 
         <div className="mt-40 flex justify-center gap-3">
