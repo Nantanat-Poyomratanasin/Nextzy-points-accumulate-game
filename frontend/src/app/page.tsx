@@ -58,45 +58,65 @@ export default function Home() {
   }, [pathname]);
 
   const handleReset = async () => {
-    await resetGame();
+    try {
+      await resetGame();
 
-    await loadGameData();
+      await loadGameData();
+    } catch (error) {
+      console.error(error);
+      alert("ไม่สามารถรีเซ็ตข้อมูลได้");
+    }
   };
 
   const handleClaimA = async () => {
-    await claimReward("A");
+    try {
+      await claimReward("A");
 
-    const data = await getGameData();
+      const data = await getGameData();
 
-    setRewardHistory(data.rewardHistory);
-    setTotalScore(data.totalScore);
+      setRewardHistory(data.rewardHistory);
+      setTotalScore(data.totalScore);
 
-    setSelectedReward("A");
-    setShowRewardModal(true);
+      setSelectedReward("A");
+      setShowRewardModal(true);
+    } catch (error) {
+      console.error(error);
+      alert("ไม่สามารถรับรางวัลได้");
+    }
   };
 
   const handleClaimB = async () => {
-    await claimReward("B");
+    try {
+      await claimReward("B");
 
-    const data = await getGameData();
+      const data = await getGameData();
 
-    setRewardHistory(data.rewardHistory);
-    setTotalScore(data.totalScore);
+      setRewardHistory(data.rewardHistory);
+      setTotalScore(data.totalScore);
 
-    setSelectedReward("B");
-    setShowRewardModal(true);
+      setSelectedReward("B");
+      setShowRewardModal(true);
+    } catch (error) {
+      console.error(error);
+      alert("ไม่สามารถรับรางวัลได้");
+    }
   };
 
   const handleClaimC = async () => {
-    await claimReward("C");
+    try {
+      await claimReward("C");
 
-    const data = await getGameData();
+      const data = await getGameData();
 
-    setRewardHistory(data.rewardHistory);
-    setTotalScore(data.totalScore);
+      setRewardHistory(data.rewardHistory);
+      setTotalScore(data.totalScore);
 
-    setSelectedReward("C");
-    setShowRewardModal(true);
+      setSelectedReward("C");
+      setShowRewardModal(true);
+    } catch (error) {
+      console.error(error);
+      alert("ไม่สามารถรับรางวัลได้");
+    }
   };
 
   const router = useRouter();

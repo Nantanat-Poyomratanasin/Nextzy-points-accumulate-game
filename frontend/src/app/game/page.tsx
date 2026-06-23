@@ -59,18 +59,26 @@ export default function GamePage() {
   };
 
   const finishGame = async () => {
-    const result = await playGameApi();
+    try {
+      const result = await playGameApi();
 
-    setTotalScore(result.totalScore);
+      setTotalScore(result.totalScore);
 
-    setFinalScore(result.score);
+      setFinalScore(result.score);
 
-    setSelectedScore(result.score);
+      setSelectedScore(result.score);
 
-    setTimeout(() => {
-      setGameStatus("finish");
-      setShowModal(true);
-    }, 300);
+      setTimeout(() => {
+        setGameStatus("finish");
+        setShowModal(true);
+      }, 300);
+    } catch (error) {
+      console.error(error);
+
+      alert("ไม่สามารถสุ่มคะแนนได้");
+
+      setGameStatus("start");
+    }
   };
 
   const router = useRouter();
