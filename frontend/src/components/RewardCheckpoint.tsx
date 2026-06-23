@@ -22,9 +22,9 @@ export default function RewardCheckpoint({
   onClaimC,
 }: RewardCheckpointProps) {
   return (
-    <div className="relative mt-8 h-16 text-center">
-      <div className="relative mt-6 h-12">
-        <div className="absolute left-1/2 -translate-x-1/2">
+    <div className="relative mt-8 h-16 text-center ">
+      <div className="relative mt-8 h-16 ">
+        <div className="absolute left-[50%] -translate-x-1/2">
           <RewardButton
             score={score}
             checkpoint={5000}
@@ -34,7 +34,7 @@ export default function RewardCheckpoint({
           />
         </div>
 
-        <div className="absolute left-3/4 -translate-x-1/2">
+        <div className="absolute left-[75%] -translate-x-1/2">
           <RewardButton
             score={score}
             checkpoint={7500}
@@ -44,7 +44,7 @@ export default function RewardCheckpoint({
           />
         </div>
 
-        <div className="absolute right-0">
+        <div className="absolute left-[100%] -translate-x-1/2">
           <RewardButton
             score={score}
             checkpoint={10000}

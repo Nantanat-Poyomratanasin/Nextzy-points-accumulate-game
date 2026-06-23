@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import ScoreModal from "../../components/ScoreModal";
+import FooterButton from "../../components/FooterButton";
+import { useRouter } from "next/navigation";
 
 export default function GamePage() {
   const scores = [300, 500, 1000, 3000];
@@ -47,9 +49,11 @@ export default function GamePage() {
     }, 120);
   };
 
+  const router = useRouter();
+
   return (
-    <main className="min-h-screen flex justify-center bg-[#F5F5F5] p-6">
-      <div className="w-[375px] h-[812px] bg-gradient-to-b from-white to-[#FF8D0B] rounded-[24px] overflow-hidden">
+    <main className="min-h-screen flex justify-center bg-[#F5F5F5]">
+      <div className="relative w-[375px] h-[812px] bg-gradient-to-b from-white to-[#FF8D0B] overflow-hidden">
         <h2 className="pt-12 text-center text-[16px] font-bold text-[#333333]">
           คะแนนสะสม 0/10000
         </h2>
@@ -94,6 +98,7 @@ export default function GamePage() {
           score={finalScore}
           onClose={() => setShowModal(false)}
         />
+        <FooterButton text="กลับหน้าหลัก" onClick={() => router.push("/")} />
       </div>
     </main>
   );

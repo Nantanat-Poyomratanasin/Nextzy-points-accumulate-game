@@ -24,13 +24,17 @@ export default function SummaryCard({
   onClaimC,
 }: SummaryCardProps) {
   return (
-    <div className="bg-white rounded-3xl border-2 border-black p-4">
-      <h2 className="text-3xl text-black font-bold text-right">สะสมคะแนน</h2>
-      <h2 className="text-2xl text-black font-semibold text-right">
-        คะแนนครบ 10,000 รับรางวัลใหญ่
-      </h2>
+    <div className="bg-white rounded-3xl border-2 border-black p-4  h-[200px]">
+      <div>
+        <h2 className="text-[16px] text-black font-bold text-right">
+          สะสมคะแนน
+        </h2>
+        <h2 className="text-[16px] text-black font-semibold text-right">
+          คะแนนครบ 10,000 รับรางวัลใหญ่
+        </h2>
+      </div>
 
-      <h2 className="text-4xl text-black font-bold text-red-500 text-right">
+      <h2 className="text-[24px] font-bold text-red-500 text-right">
         {score.toLocaleString()} / 10,000
       </h2>
       <ProgressBar score={score} />

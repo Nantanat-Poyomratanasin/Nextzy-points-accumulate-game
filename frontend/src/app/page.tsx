@@ -6,6 +6,8 @@ import RewardModal from "../components/RewardModal";
 import HistoryTabs from "../components/HistoryTabs";
 import RewardHistory from "../components/RewardHistory";
 import PlayHistory from "../components/PlayHistory";
+import FooterButton from "../components/FooterButton";
+import { useRouter } from "next/navigation";
 
 type RewardItem = {
   reward: string;
@@ -74,30 +76,38 @@ export default function Home() {
     setShowRewardModal(true);
   };
 
+  const router = useRouter();
+
   return (
-    <main className="min-h-screen bg-gray-100 p-4">
-      <SummaryCard
-        score={totalScore}
-        claimedA={claimedA}
-        claimedB={claimedB}
-        claimedC={claimedC}
-        onClaimA={handleClaimA}
-        onClaimB={handleClaimB}
-        onClaimC={handleClaimC}
-      />
+    <main className="min-h-screen flex justify-center  bg-gray-100">
+      <div className="relative w-[375px] h-[812px]">
+        <div className="bg-[#E5E5E5] p-4">
+          <SummaryCard
+            score={totalScore}
+            claimedA={claimedA}
+            claimedB={claimedB}
+            claimedC={claimedC}
+            onClaimA={handleClaimA}
+            onClaimB={handleClaimB}
+            onClaimC={handleClaimC}
+          />
+        </div>
 
-      <RewardModal
-        isOpen={showRewardModal}
-        rewardName={selectedReward}
-        onClose={() => setShowRewardModal(false)}
-      />
+        <RewardModal
+          isOpen={showRewardModal}
+          rewardName={selectedReward}
+          onClose={() => setShowRewardModal(false)}
+        />
 
-      <HistoryTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === "play" ? (
-        <PlayHistory plays={playHistory} />
-      ) : (
-        <RewardHistory rewards={rewardHistory} />
-      )}
+        <HistoryTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        {activeTab === "play" ? (
+          <PlayHistory plays={playHistory} />
+        ) : (
+          <RewardHistory rewards={rewardHistory} />
+        )}
+
+        <FooterButton text="ไปเล่นเกม" onClick={() => router.push("/game")} />
+      </div>
     </main>
   );
 }
