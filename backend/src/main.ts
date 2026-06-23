@@ -3,6 +3,12 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+      'https://nextzy-points-accumulate-game.vercel.app',
+    ],
+  });
   await app.listen(process.env.PORT ?? 3002);
 }
 bootstrap();

@@ -17,5 +17,5 @@ POST http://localhost:3002/game/reward
 Content-Type: application/json
 
 {
-  "reward": "A"
+  "reward": "C"
 }

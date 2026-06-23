@@ -55,11 +55,7 @@ export class GameService {
     }
 
     if (gameState.totalScore >= 10000) {
-      return {
-        score: 0,
-        totalScore: 10000,
-        message: 'Maximum score reached',
-      };
+      throw new BadRequestException('คะแนนสะสมครบ 10000 แล้ว');
     }
 
     const updatedGameState = await this.prisma.gameState.update({
