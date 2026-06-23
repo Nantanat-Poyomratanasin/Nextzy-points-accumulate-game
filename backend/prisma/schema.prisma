@@ -12,11 +12,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         Int @id @default(autoincrement())
-  totalScore Int @default(0)
-}
-
 model PlayHistory {
   id        Int      @id @default(autoincrement())
   score     Int
@@ -27,4 +22,9 @@ model RewardHistory {
   id        Int      @id @default(autoincrement())
   reward    String
   claimedAt DateTime @default(now())
+}
+
+model GameState {
+  id         Int @id @default(autoincrement())
+  totalScore Int @default(0)
 }

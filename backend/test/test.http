@@ -1,0 +1,21 @@
+GET http://localhost:3002/game
+
+###
+POST http://localhost:3002/game/play
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:3002/game/reset
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:3002/game/reward
+Content-Type: application/json
+
+{
+  "reward": "A"
+}
