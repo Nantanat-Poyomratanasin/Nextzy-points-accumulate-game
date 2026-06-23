@@ -79,7 +79,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="min-h-screen flex justify-center  bg-gray-100">
+    <main className="min-h-screen flex justify-center  bg-white">
       <div className="relative w-[375px] h-[812px]">
         <div className="bg-[#E5E5E5] p-4">
           <SummaryCard

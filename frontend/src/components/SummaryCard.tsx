@@ -34,19 +34,21 @@ export default function SummaryCard({
         </h2>
       </div>
 
-      <h2 className="text-[24px] font-bold text-red-500 text-right">
-        {score.toLocaleString()} / 10,000
-      </h2>
-      <ProgressBar score={score} />
-      <RewardCheckpoint
-        score={score}
-        claimedA={claimedA}
-        claimedB={claimedB}
-        claimedC={claimedC}
-        onClaimA={onClaimA}
-        onClaimB={onClaimB}
-        onClaimC={onClaimC}
-      />
+      <div className="w-[286px] mx-auto px-4">
+        <h2 className="text-[24px] font-bold text-red-500 text-right">
+          {score.toLocaleString()} / 10,000
+        </h2>
+        <ProgressBar score={score} />
+        <RewardCheckpoint
+          score={score}
+          claimedA={claimedA}
+          claimedB={claimedB}
+          claimedC={claimedC}
+          onClaimA={onClaimA}
+          onClaimB={onClaimB}
+          onClaimC={onClaimC}
+        />
+      </div>
     </div>
   );
 }

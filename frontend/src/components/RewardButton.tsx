@@ -20,7 +20,7 @@ export default function RewardButton({
     <button
       disabled={!canClaim || claimed}
       onClick={onClaim}
-      className="rounded-[12.5px] h-[20px] px-2 text-white font-bold whitespace-nowrap text-[8px]
+      className="rounded-[12.5px] w-[60px] h-[20px] px-1 text-white font-bold whitespace-nowrap text-[8px]
       bg-red-500 disabled:bg-gray-300"
     >
       {claimed

@@ -1,4 +1,5 @@
 import RewardButton from "./RewardButton";
+import { CHECKPOINTS } from "../constants/checkpoints";
 
 type RewardCheckpointProps = {
   score: number;
@@ -22,38 +23,34 @@ export default function RewardCheckpoint({
   onClaimC,
 }: RewardCheckpointProps) {
   return (
-    <div className="relative mt-8 h-16 text-center ">
-      <div className="relative mt-8 h-16 ">
-        <div className="absolute left-[50%] -translate-x-1/2">
+    <div className="relative w-full mt-4 h-16">
+      {CHECKPOINTS.map((checkpoint) => (
+        <div
+          key={checkpoint.reward}
+          className="absolute -translate-x-1/2"
+          style={{ left: `${checkpoint.position}%` }}
+        >
           <RewardButton
             score={score}
-            checkpoint={5000}
-            rewardName="A"
-            claimed={claimedA}
-            onClaim={onClaimA}
+            checkpoint={checkpoint.score}
+            rewardName={checkpoint.reward}
+            claimed={
+              checkpoint.reward === "A"
+                ? claimedA
+                : checkpoint.reward === "B"
+                  ? claimedB
+                  : claimedC
+            }
+            onClaim={
+              checkpoint.reward === "A"
+                ? onClaimA
+                : checkpoint.reward === "B"
+                  ? onClaimB
+                  : onClaimC
+            }
           />
         </div>
-
-        <div className="absolute left-[75%] -translate-x-1/2">
-          <RewardButton
-            score={score}
-            checkpoint={7500}
-            rewardName="B"
-            claimed={claimedB}
-            onClaim={onClaimB}
-          />
-        </div>
-
-        <div className="absolute left-[100%] -translate-x-1/2">
-          <RewardButton
-            score={score}
-            checkpoint={10000}
-            rewardName="C"
-            claimed={claimedC}
-            onClaim={onClaimC}
-          />
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
