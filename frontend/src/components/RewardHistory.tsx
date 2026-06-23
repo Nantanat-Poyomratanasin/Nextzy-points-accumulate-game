@@ -1,6 +1,6 @@
 type RewardItem = {
   reward: string;
-  createdAt: string;
+  claimedAt: string;
 };
 
 type RewardHistoryProps = {

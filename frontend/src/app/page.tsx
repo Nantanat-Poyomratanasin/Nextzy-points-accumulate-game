@@ -10,12 +10,14 @@ import HistoryTabs from "../components/HistoryTabs";
 import RewardHistory from "../components/RewardHistory";
 import PlayHistory from "../components/PlayHistory";
 import FooterButton from "../components/FooterButton";
+import ResetButton from "../components/ResetButton";
 
 import { getGameData, claimReward } from "../services/gameApi";
+import { resetGame } from "../services/gameApi";
 
 type RewardItem = {
   reward: string;
-  createdAt: string;
+  claimedAt: string;
 };
 
 type PlayHistoryItem = {
@@ -41,19 +43,25 @@ export default function Home() {
 
   const pathname = usePathname();
 
+  const loadGameData = async () => {
+    const data = await getGameData();
+
+    setTotalScore(data.totalScore);
+
+    setPlayHistory(data.playHistory);
+
+    setRewardHistory(data.rewardHistory);
+  };
+
   useEffect(() => {
-    const loadGameData = async () => {
-      const data = await getGameData();
-
-      setTotalScore(data.totalScore);
-
-      setPlayHistory(data.playHistory);
-
-      setRewardHistory(data.rewardHistory);
-    };
-
     loadGameData();
   }, [pathname]);
+
+  const handleReset = async () => {
+    await resetGame();
+
+    await loadGameData();
+  };
 
   const handleClaimA = async () => {
     await claimReward("A");
@@ -107,6 +115,8 @@ export default function Home() {
             onClaimC={handleClaimC}
           />
         </div>
+
+        <ResetButton onReset={handleReset} />
 
         <RewardModal
           isOpen={showRewardModal}
