@@ -24,7 +24,26 @@ export default function SummaryCard({
   onClaimC,
 }: SummaryCardProps) {
   return (
-    <div className="bg-white rounded-3xl border-2 border-black p-4  h-[200px]">
+    <div className="relative bg-white rounded-3xl border-2 border-black px-6 py-4 h-[200px]">
+      <button
+        className="
+    absolute
+    left-0
+    top-8
+    z-10
+    rounded-r-[24px]
+    bg-[#B83434]
+    px-2
+   
+    w-[70px]
+    h-[22px]
+    text-white
+    text-[10px]
+    font-medium
+  "
+      >
+        แชร์คะแนน
+      </button>
       <div>
         <h2 className="text-[16px] text-black font-semibold text-right">
           สะสมคะแนน
@@ -38,7 +57,7 @@ export default function SummaryCard({
         {score.toLocaleString()} / 10,000
       </h2>
 
-      <div className="w-full px-3">
+      <div className="w-full pl-2 pr-3">
         <ProgressBar score={score} />
         <RewardCheckpoint
           score={score}

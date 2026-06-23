@@ -90,24 +90,28 @@ export default function GamePage() {
   return (
     <main className="min-h-screen flex justify-center min-w-[375px] bg-[#F5F5F5]">
       <div className="relative w-full min-h-auto bg-gradient-to-b from-white to-[#FF8D0B] overflow-hidden">
-        <h2 className="pt-12 text-center text-[16px] font-bold text-[#333333]">
+        <h2 className="pt-12 text-center text-[24px] font-semibold text-[#212B36]">
           คะแนนสะสม {totalScore}/10000
         </h2>
 
-        <div className="mt-40 flex justify-center gap-3">
+        <div className="mt-40 flex justify-center gap-2">
           {scores.map((score) => (
             <div
               key={score}
               className={`
-      rounded-xl px-4 py-2 font-bold transition-all
+      rounded-[12.5px] px-4 py-1 font-semibold transition-all
 
-      ${
-        gameStatus === "start"
-          ? "bg-[#27D9D2] text-green-800"
-          : selectedScore === score
-            ? "bg-green-500 text-white"
-            : "text-green-500"
-      }
+     ${
+       gameStatus === "start"
+         ? "bg-[#1AE3D6] text-[#09862E] text-[24px]"
+         : gameStatus === "playing"
+           ? selectedScore === score
+             ? "bg-[#1AE3D6] text-[#09862E] text-[24px]"
+             : "text-[#09862E] text-[24px] opacity-50"
+           : selectedScore === score
+             ? "bg-[#0EF76F] text-[#09862E] text-[24px]"
+             : "text-[#09862E] text-[24px] opacity-50"
+     }
     `}
             >
               {score}
@@ -115,16 +119,16 @@ export default function GamePage() {
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-12 flex justify-center text-[24px]">
           <button
             onClick={handlePlay}
             disabled={gameStatus === "playing" || isScoreFull}
             className={
               isScoreFull
-                ? "bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed"
+                ? "bg-gray-400 text-white px-4 py-2 rounded-[12.5px] cursor-not-allowed"
                 : gameStatus === "playing"
-                  ? "bg-pink-300 text-white px-4 py-2 rounded"
-                  : "bg-red-500 text-white px-4 py-2 rounded"
+                  ? "bg-[#FF2428] text-white px-4 py-1 rounded-[12.5px] opacity-30 cursor-not-allowed"
+                  : "bg-[#FF2428]  text-white px-4 py-1 rounded-[12.5px]"
             }
           >
             สุ่มคะแนน

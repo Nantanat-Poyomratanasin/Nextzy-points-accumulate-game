@@ -13,23 +13,23 @@ export default function ScoreModal({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="relative w-[320px] rounded-[16px] bg-white p-6 text-center">
+      <div className="relative w-[340px] rounded-[20px] bg-white p-8 text-center">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 text-3xl text-gray-400"
+          className="absolute right-5 top-1 text-5xl text-[#979797]"
         >
           ×
         </button>
 
-        <h2 className="mt-6 text-3xl font-bold text-[#333333]">ได้รับ</h2>
+        <h2 className="mt-4 text-[24px] font-medium text-[#333333]">ได้รับ</h2>
 
-        <p className="mt-3 text-lg text-[#666666]">
+        <p className="mt-2 text-[16px] font-normal text-[#565656]">
           {score?.toLocaleString()} คะแนน
         </p>
 
         <button
           onClick={onClose}
-          className="mt-8 h-[40px] w-[160px] rounded-full bg-[#F8BD1A] font-bold text-white"
+          className="mt-8 h-[35px] w-[177px] rounded-[17.5px] bg-[#FFC124] font-bold text-white text-[16px]"
         >
           ปิด
         </button>

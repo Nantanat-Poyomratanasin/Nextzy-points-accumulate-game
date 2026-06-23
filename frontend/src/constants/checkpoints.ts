@@ -11,7 +11,7 @@ export const CHECKPOINTS = [
   },
   {
     score: 10000,
-    position: 95,
+    position: 100,
     reward: "C",
   },
 ];

@@ -9,7 +9,7 @@ export default function ProgressBar({ score }: ProgressBarProps) {
   const markerPosition = (score / 10000) * 100;
 
   return (
-    <div>
+    <div className="">
       <div className="relative h-6 text-gray-500  text-[10px]">
         {CHECKPOINTS.map((checkpoint) => (
           <span
@@ -22,12 +22,12 @@ export default function ProgressBar({ score }: ProgressBarProps) {
         ))}
       </div>
 
-      <div className="relative w-full h-[9px]">
-        <div className="relative w-full h-[9px] bg-orange-400 rounded-full "></div>
+      <div className="relative w-full h-[9px] ">
+        <div className="relative w-full h-[9px] bg-gradient-to-r from-[#FF8158] to-[#FF8902] rounded-full "></div>
 
         <div
           className="absolute
-    top-1/2 h-[18px] w-[18px] rounded-full bg-gradient-to-b from-[#FF8158] to-[#FF8902] overflow-hidden
+    top-1/2 h-[18px] w-[18px] rounded-full bg-gradient-to-b from-[#FF0004] to-[#FC8625] overflow-hidden
                -translate-x-1/2 -translate-y-1/2"
           style={{
             left: `${markerPosition}%`,
