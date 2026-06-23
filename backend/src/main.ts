@@ -6,8 +6,11 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:3000',
-      'https://nextzy-points-accumulate-game.vercel.app',
+      'http://localhost:5173',
+      'https://nextzy-points-accumulate-game-qt1funlyw.vercel.app',
     ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    credentials: true,
   });
   await app.listen(process.env.PORT ?? 3002);
 }
