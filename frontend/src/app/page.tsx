@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import SummaryCard from "../components/SummaryCard";
 import RewardModal from "../components/RewardModal";
 import HistoryTabs from "../components/HistoryTabs";
 import RewardHistory from "../components/RewardHistory";
 import PlayHistory from "../components/PlayHistory";
 import FooterButton from "../components/FooterButton";
-import { useRouter } from "next/navigation";
+
+import { getGameData } from "../services/gameApi";
 
 type RewardItem = {
   reward: string;
@@ -20,7 +23,7 @@ type PlayHistoryItem = {
 };
 
 export default function Home() {
-  const [totalScore, setTotalScore] = useState(10000);
+  const [totalScore, setTotalScore] = useState(0);
   const [claimedA, setClaimedA] = useState(false);
   const [claimedB, setClaimedB] = useState(false);
   const [claimedC, setClaimedC] = useState(false);
@@ -30,6 +33,20 @@ export default function Home() {
 
   const [rewardHistory, setRewardHistory] = useState<RewardItem[]>([]);
   const [playHistory, setPlayHistory] = useState<PlayHistoryItem[]>([]);
+
+  useEffect(() => {
+    const loadGameData = async () => {
+      const data = await getGameData();
+
+      setTotalScore(data.totalScore);
+
+      setPlayHistory(data.playHistory);
+
+      setRewardHistory(data.rewardHistory);
+    };
+
+    loadGameData();
+  }, []);
 
   const handleClaimA = () => {
     setClaimedA(true);
