@@ -10,23 +10,21 @@ import RewardHistory from "../components/RewardHistory";
 import PlayHistory from "../components/PlayHistory";
 import FooterButton from "../components/FooterButton";
 
-import { getGameData } from "../services/gameApi";
+import { getGameData, claimReward } from "../services/gameApi";
 
 type RewardItem = {
   reward: string;
-  date: string;
+  createdAt: string;
 };
 
 type PlayHistoryItem = {
   score: number;
-  date: string;
+  createdAt: string;
 };
 
 export default function Home() {
   const [totalScore, setTotalScore] = useState(0);
-  const [claimedA, setClaimedA] = useState(false);
-  const [claimedB, setClaimedB] = useState(false);
-  const [claimedC, setClaimedC] = useState(false);
+
   const [showRewardModal, setShowRewardModal] = useState(false);
   const [selectedReward, setSelectedReward] = useState("");
   const [activeTab, setActiveTab] = useState<"play" | "reward">("play");
@@ -34,10 +32,16 @@ export default function Home() {
   const [rewardHistory, setRewardHistory] = useState<RewardItem[]>([]);
   const [playHistory, setPlayHistory] = useState<PlayHistoryItem[]>([]);
 
+  const claimedA = rewardHistory.some((item) => item.reward === "A");
+
+  const claimedB = rewardHistory.some((item) => item.reward === "B");
+
+  const claimedC = rewardHistory.some((item) => item.reward === "C");
+
   useEffect(() => {
     const loadGameData = async () => {
       const data = await getGameData();
-
+      console.log(data);
       setTotalScore(data.totalScore);
 
       setPlayHistory(data.playHistory);
@@ -48,46 +52,37 @@ export default function Home() {
     loadGameData();
   }, []);
 
-  const handleClaimA = () => {
-    setClaimedA(true);
+  const handleClaimA = async () => {
+    await claimReward("A");
 
-    setRewardHistory((prev) => [
-      ...prev,
-      {
-        reward: "A",
-        date: new Date().toLocaleString(),
-      },
-    ]);
+    const data = await getGameData();
+
+    setRewardHistory(data.rewardHistory);
+    setTotalScore(data.totalScore);
 
     setSelectedReward("A");
     setShowRewardModal(true);
   };
 
-  const handleClaimB = () => {
-    setClaimedB(true);
+  const handleClaimB = async () => {
+    await claimReward("B");
 
-    setRewardHistory((prev) => [
-      ...prev,
-      {
-        reward: "B",
-        date: new Date().toLocaleString(),
-      },
-    ]);
+    const data = await getGameData();
+
+    setRewardHistory(data.rewardHistory);
+    setTotalScore(data.totalScore);
 
     setSelectedReward("B");
     setShowRewardModal(true);
   };
 
-  const handleClaimC = () => {
-    setClaimedC(true);
+  const handleClaimC = async () => {
+    await claimReward("C");
 
-    setRewardHistory((prev) => [
-      ...prev,
-      {
-        reward: "C",
-        date: new Date().toLocaleString(),
-      },
-    ]);
+    const data = await getGameData();
+
+    setRewardHistory(data.rewardHistory);
+    setTotalScore(data.totalScore);
 
     setSelectedReward("C");
     setShowRewardModal(true);
@@ -97,7 +92,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex justify-center  bg-white">
-      <div className="relative w-[375px] h-[812px]">
+      <div className="relative w-[375px] min-h-[812px]">
         <div className="bg-[#E5E5E5] p-4">
           <SummaryCard
             score={totalScore}

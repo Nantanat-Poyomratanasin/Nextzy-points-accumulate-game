@@ -1,6 +1,6 @@
 type RewardItem = {
   reward: string;
-  date: string;
+  createdAt: string;
 };
 
 type RewardHistoryProps = {
@@ -22,7 +22,10 @@ export default function RewardHistory({ rewards }: RewardHistoryProps) {
               </h3>
 
               <p className="text-[16px] text-[#A7A7A7]">
-                ได้รับเมื่อ {item.date}
+                ได้รับเมื่อ{" "}
+                {new Date(item.claimedAt).toLocaleString("th-TH", {
+                  timeZone: "Asia/Bangkok",
+                })}
               </p>
             </div>
           </div>
