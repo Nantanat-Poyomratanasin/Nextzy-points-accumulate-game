@@ -60,6 +60,8 @@ export default function GamePage() {
 
   const finishGame = async () => {
     try {
+      const oldScore = totalScore;
+
       const result = await playGameApi();
 
       setTotalScore(result.totalScore);
@@ -81,11 +83,13 @@ export default function GamePage() {
     }
   };
 
+  const isScoreFull = totalScore >= 10000;
+
   const router = useRouter();
 
   return (
-    <main className="min-h-screen flex justify-center bg-[#F5F5F5]">
-      <div className="relative w-[375px] h-[812px] bg-gradient-to-b from-white to-[#FF8D0B] overflow-hidden">
+    <main className="min-h-screen flex justify-center min-w-[375px] bg-[#F5F5F5]">
+      <div className="relative w-full min-h-auto bg-gradient-to-b from-white to-[#FF8D0B] overflow-hidden">
         <h2 className="pt-12 text-center text-[16px] font-bold text-[#333333]">
           คะแนนสะสม {totalScore}/10000
         </h2>
@@ -114,11 +118,13 @@ export default function GamePage() {
         <div className="mt-12 flex justify-center">
           <button
             onClick={handlePlay}
-            disabled={gameStatus === "playing"}
+            disabled={gameStatus === "playing" || isScoreFull}
             className={
-              gameStatus === "playing"
-                ? "bg-pink-300 text-white px-4 py-2 rounded"
-                : "bg-red-500 text-white px-4 py-2 rounded"
+              isScoreFull
+                ? "bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed"
+                : gameStatus === "playing"
+                  ? "bg-pink-300 text-white px-4 py-2 rounded"
+                  : "bg-red-500 text-white px-4 py-2 rounded"
             }
           >
             สุ่มคะแนน
@@ -130,6 +136,7 @@ export default function GamePage() {
           score={finalScore}
           onClose={() => setShowModal(false)}
         />
+
         <FooterButton text="กลับหน้าหลัก" onClick={() => router.push("/")} />
       </div>
     </main>

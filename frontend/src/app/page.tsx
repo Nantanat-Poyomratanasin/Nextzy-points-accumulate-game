@@ -122,8 +122,8 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="min-h-screen flex justify-center  bg-white">
-      <div className="relative w-[375px] min-h-[812px]">
+    <main className="min-h-screen flex min-w-[375px] justify-center  bg-white">
+      <div className="relative  w-full min-h-auto">
         <div className="bg-[#E5E5E5] p-4">
           <SummaryCard
             score={totalScore}
@@ -136,7 +136,9 @@ export default function Home() {
           />
         </div>
 
-        <ResetButton onReset={handleReset} />
+        <div className="my-6 flex justify-center">
+          <ResetButton onReset={handleReset} />
+        </div>
 
         <RewardModal
           isOpen={showRewardModal}

@@ -26,18 +26,19 @@ export default function SummaryCard({
   return (
     <div className="bg-white rounded-3xl border-2 border-black p-4  h-[200px]">
       <div>
-        <h2 className="text-[16px] text-black font-bold text-right">
+        <h2 className="text-[16px] text-black font-semibold text-right">
           สะสมคะแนน
         </h2>
-        <h2 className="text-[16px] text-black font-semibold text-right">
+        <h2 className="text-[14px] text-black font-medium text-right">
           คะแนนครบ 10,000 รับรางวัลใหญ่
         </h2>
       </div>
 
-      <div className="w-[286px] mx-auto px-4">
-        <h2 className="text-[24px] font-bold text-red-500 text-right">
-          {score.toLocaleString()} / 10,000
-        </h2>
+      <h2 className="text-[24px] font-semibold text-[#FF2428] text-right mb-3">
+        {score.toLocaleString()} / 10,000
+      </h2>
+
+      <div className="w-full px-3">
         <ProgressBar score={score} />
         <RewardCheckpoint
           score={score}

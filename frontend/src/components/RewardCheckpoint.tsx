@@ -23,7 +23,7 @@ export default function RewardCheckpoint({
   onClaimC,
 }: RewardCheckpointProps) {
   return (
-    <div className="relative w-full mt-4 h-16">
+    <div className="relative w-full mt-1 h-16">
       {CHECKPOINTS.map((checkpoint) => (
         <div
           key={checkpoint.reward}
