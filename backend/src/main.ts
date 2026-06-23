@@ -7,7 +7,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:3000',
       'http://localhost:5173',
-      'https://nextzy-points-accumulate-game-qt1funlyw.vercel.app',
+      'https://nextzy-points-accumulate-game.vercel.app',
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
